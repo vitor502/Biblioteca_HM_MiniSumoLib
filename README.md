@@ -1,50 +1,54 @@
-# HM_MiniSumoLib
+# 🏆 HM_MiniSumoLib
 
-A **HM_MiniSumoLib** é uma biblioteca para Arduino IDE voltada para o controle de motores DC usando o ESP32 com a ponte H TB6612FNG, projetada especialmente para robôs Mini Sumô e Cupim.
+**HM_MiniSumoLib** é uma biblioteca em C++ desenvolvida para a plataforma Arduino IDE, focada no controle de robôs da categoria Mini Sumô usando o microcontrolador ESP32 WROOM e a ponte H Toshiba TB6612FNG.
 
-## Conteúdo do pacote
+Ela oferece uma interface simples para controlar motores DC de 12V, permitindo implementar movimentos básicos (frente, ré, curvas, frenagem) e avançados (aceleração progressiva, inversão de motores, controle com sensores) com poucos comandos.
 
-- `HM_MiniSumoLib.h` — Arquivo de cabeçalho da biblioteca.
-- `HM_MiniSumoLib.cpp` — Implementação da biblioteca.
-- `ExampleSketch/ExampleSketch.ino` — Sketch de exemplo mostrando como usar a biblioteca.
+## ✨ Funcionalidades
 
-## Como instalar
+- ✅ **Inicialização automática** dos pinos e canais PWM
+- ✅ **Controle de movimento**: frente, ré, esquerda, direita, curvas em ré
+- ✅ **Frenagem** e **desligamento** imediato dos motores
+- ✅ **Aceleração progressiva** para evitar solavancos
+- ✅ **Inversão de direção** para motores montados em espelho
+- ✅ **Integração com sensores** (borda e detecção de oponente)
+- ✅ **Monitoramento e feedback** via Serial
 
-1. Baixe o arquivo `.zip` deste pacote.
-2. No Arduino IDE, vá em **Sketch > Incluir Biblioteca > Adicionar Biblioteca .ZIP...**
-3. Selecione o arquivo `.zip` baixado.
-4. A biblioteca será adicionada à sua lista de bibliotecas.
+## 🔧 Especificações técnicas
 
-## Como usar
+- **Microcontrolador**: ESP32 WROOM
+- **Driver de motor**: TB6612FNG
+- **Tensão dos motores**: 12V DC
+- **Frequência PWM**: 3600 Hz
+- **Resolução PWM**: 8 bits (0–255)
+- **Pinos usados**:
+  - AIN1 (GPIO 18), AIN2 (GPIO 5), PWMA (GPIO 22)
+  - BIN1 (GPIO 19), BIN2 (GPIO 21), PWMB (GPIO 23)
 
-1. Abra o Arduino IDE.
-2. Vá em **Arquivo > Exemplos > HM_MiniSumoLib > ExampleSketch**.
-3. Conecte seu ESP32 à porta USB.
-4. Compile e envie o código para a placa.
+## 📦 Como usar
 
-O exemplo incluído realiza a seguinte sequência:
-- Move para frente por 1 segundo.
-- Freia por 0,5 segundo.
-- Move para trás por 1 segundo.
-- Gira para a esquerda por 1 segundo.
-- Gira para a direita por 1 segundo.
-- Desliga os motores por 2 segundos.
+1️⃣ Instale a biblioteca via Arduino IDE (**Sketch > Incluir Biblioteca > Adicionar Biblioteca .ZIP...**)
 
-## Especificações técnicas
+2️⃣ Inclua no seu código:
+  
+   #include <HM_MiniSumoLib.h>
 
-- Pinos usados:
-  - AIN1: GPIO 18
-  - AIN2: GPIO 5
-  - PWMA: GPIO 22
-  - BIN1: GPIO 19
-  - BIN2: GPIO 21
-  - PWMB: GPIO 23
+3️⃣ Inicialize no setup():
 
-- Frequência PWM: 3600 Hz
-- Resolução PWM: 8 bits
+hm.Start();
 
-## Requisitos
+4️⃣ Controle os motores no loop():
 
-- ESP32 WROOM
-- Ponte H TB6612FNG
-- Arduino IDE instalado
+hm.MoveForward(255, 255);
+
+hm.SetBreakMotors();
+
+hm.ShutdownMotors();
+
+##💡 Exemplos incluídos
+
+O repositório traz exemplos prontos para rodar, facilitando o teste e a integração no seu robô.
+
+## 📝 Licença
+
+Este projeto é licenciado sob a [MIT License](https://opensource.org/licenses/MIT).
